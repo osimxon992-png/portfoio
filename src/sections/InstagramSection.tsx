@@ -1,7 +1,10 @@
 import FadeIn from '../components/FadeIn';
 
 const profileUrl = 'https://www.instagram.com/dadaxanov.26/';
-const reels = ['De1hznfMTRI', 'DezVm-NsW8w'];
+const reels = [
+  { code: 'De1hznfMTRI', src: '/social/reel-1.mp4', tilt: '-rotate-6' },
+  { code: 'DezVm-NsW8w', src: '/social/reel-2.mp4', tilt: 'rotate-6' },
+];
 const igGradient = 'linear-gradient(45deg, #F58529, #DD2A7B 50%, #8134AF 75%, #515BD4)';
 
 // shortcut: numbers are a snapshot of the public profile (2026-10-25), update by hand when they change
@@ -20,19 +23,23 @@ export default function InstagramSection() {
         </h2>
       </FadeIn>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-[1fr_1.4fr_1fr]">
-        {reels.map((code, i) => (
-          <FadeIn key={code} delay={0.2 + i * 0.1} x={i ? 80 : -80} y={0} duration={0.9} className={`mx-auto w-full max-w-[360px] ${i ? 'lg:order-3' : ''}`}>
-            <iframe
-              src={`https://www.instagram.com/reel/${code}/embed/`}
-              title={`Instagram reel ${i + 1}`}
-              loading="lazy"
-              allowFullScreen
-              className="h-[600px] w-full overflow-hidden rounded-[32px] border-2 border-[#D7E2EA]/40 bg-white"
-            />
+      <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-6 sm:gap-10 lg:grid-cols-[1fr_1.4fr_1fr]">
+        {reels.map((r, i) => (
+          <FadeIn key={r.code} delay={0.2 + i * 0.1} x={i ? 80 : -80} y={0} duration={0.9} className={`mx-auto w-full max-w-[300px] ${i ? 'lg:order-3' : ''}`}>
+            {/* tilt lives on the inner link; FadeIn's own transform would override it */}
+            <a
+              href={`https://www.instagram.com/reel/${r.code}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Watch reel ${i + 1} on Instagram`}
+              className={`block rounded-[32px] p-[2px] transition-transform duration-500 hover:rotate-0 hover:scale-105 ${r.tilt}`}
+              style={{ background: igGradient }}
+            >
+              <video src={r.src} autoPlay muted loop playsInline className="aspect-[9/16] w-full rounded-[30px] bg-[#0C0C0C] object-cover" />
+            </a>
           </FadeIn>
         ))}
-        <FadeIn delay={0.1} y={30} className="order-first lg:order-2">
+        <FadeIn delay={0.1} y={30} className="order-first col-span-2 lg:order-2 lg:col-span-1">
           <div className="rounded-[40px] p-[2px] sm:rounded-[50px] md:rounded-[60px]" style={{ background: igGradient }}>
             <div className="flex flex-col items-center gap-8 rounded-[38px] bg-[#0C0C0C] px-6 py-10 text-[#D7E2EA] sm:rounded-[48px] sm:px-10 md:rounded-[58px] md:px-12 md:py-12">
               <div className="shrink-0 rounded-full p-[3px]" style={{ background: igGradient }}>
