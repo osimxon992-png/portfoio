@@ -1,6 +1,7 @@
 import FadeIn from '../components/FadeIn';
 
 const profileUrl = 'https://www.instagram.com/dadaxanov.26/';
+const reels = ['De1hznfMTRI', 'DezVm-NsW8w'];
 const igGradient = 'linear-gradient(45deg, #F58529, #DD2A7B 50%, #8134AF 75%, #515BD4)';
 
 // shortcut: numbers are a snapshot of the public profile (2026-10-25), update by hand when they change
@@ -19,32 +20,44 @@ export default function InstagramSection() {
         </h2>
       </FadeIn>
 
-      <FadeIn delay={0.1} y={30} className="mx-auto max-w-4xl">
-        <div className="rounded-[40px] p-[2px] sm:rounded-[50px] md:rounded-[60px]" style={{ background: igGradient }}>
-          <div className="flex flex-col items-center gap-8 rounded-[38px] bg-[#0C0C0C] px-6 py-10 text-[#D7E2EA] sm:rounded-[48px] sm:px-10 md:flex-row md:gap-12 md:rounded-[58px] md:px-14 md:py-12">
-            <div className="shrink-0 rounded-full p-[3px]" style={{ background: igGradient }}>
-              <img
-                src="/social/instagram-avatar.jpg"
-                alt="Osimxon Dadaxanov Instagram avatar"
-                className="h-28 w-28 rounded-full border-4 border-[#0C0C0C] object-cover sm:h-36 sm:w-36"
-              />
-            </div>
-
-            <div className="flex w-full flex-col items-center gap-6 md:items-start">
-              <div className="flex flex-col items-center md:items-start">
-                <span className="text-2xl font-medium uppercase sm:text-3xl">Osimxon Dadaxanov</span>
-                <span className="font-light opacity-60">@dadaxanov.26</span>
+        <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-[1fr_1.4fr_1fr]">
+        {reels.map((code, i) => (
+          <FadeIn key={code} delay={0.2 + i * 0.1} x={i ? 80 : -80} y={0} duration={0.9} className={`mx-auto w-full max-w-[360px] ${i ? 'lg:order-3' : ''}`}>
+            <iframe
+              src={`https://www.instagram.com/reel/${code}/embed/`}
+              title={`Instagram reel ${i + 1}`}
+              loading="lazy"
+              allowFullScreen
+              className="h-[600px] w-full overflow-hidden rounded-[32px] border-2 border-[#D7E2EA]/40 bg-white"
+            />
+          </FadeIn>
+        ))}
+        <FadeIn delay={0.1} y={30} className="order-first lg:order-2">
+          <div className="rounded-[40px] p-[2px] sm:rounded-[50px] md:rounded-[60px]" style={{ background: igGradient }}>
+            <div className="flex flex-col items-center gap-8 rounded-[38px] bg-[#0C0C0C] px-6 py-10 text-[#D7E2EA] sm:rounded-[48px] sm:px-10 md:rounded-[58px] md:px-12 md:py-12">
+              <div className="shrink-0 rounded-full p-[3px]" style={{ background: igGradient }}>
+                <img
+                  src="/social/instagram-avatar.jpg"
+                  alt="Osimxon Dadaxanov Instagram avatar"
+                  className="h-28 w-28 rounded-full border-4 border-[#0C0C0C] object-cover sm:h-36 sm:w-36"
+                />
               </div>
-
-              <div className="grid w-full grid-cols-3 gap-2 text-center md:text-left">
-                {stats.map((s) => (
-                  <div key={s.label} className="flex flex-col">
-                    <span className="hero-heading text-4xl font-black sm:text-5xl">{s.value}</span>
-                    <span className="text-[10px] font-light uppercase tracking-widest opacity-60 sm:text-xs">{s.label}</span>
-                  </div>
-                ))}
-              </div>
-
+  
+              <div className="flex w-full flex-col items-center gap-6">
+                <div className="flex flex-col items-center text-center">
+                  <span className="text-2xl font-medium uppercase sm:text-3xl">Osimxon Dadaxanov</span>
+                  <span className="font-light opacity-60">@dadaxanov.26</span>
+                </div>
+  
+                <div className="grid w-full grid-cols-3 gap-2 text-center">
+                  {stats.map((s) => (
+                    <div key={s.label} className="flex flex-col">
+                      <span className="hero-heading text-4xl font-black sm:text-5xl">{s.value}</span>
+                      <span className="text-[10px] font-light uppercase tracking-widest opacity-60 sm:text-xs">{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+  
               <a
                 href={profileUrl}
                 target="_blank"
@@ -58,6 +71,7 @@ export default function InstagramSection() {
           </div>
         </div>
       </FadeIn>
+      </div>
     </section>
   );
 }
