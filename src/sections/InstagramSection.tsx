@@ -20,7 +20,7 @@ export default function InstagramSection() {
         </h2>
       </FadeIn>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-[1fr_1.4fr_1fr]">
+      <div className="mx-auto grid max-w-7xl items-center gap-6 lg:grid-cols-[1fr_1.4fr_1fr]">
         {reels.map((code, i) => (
           <FadeIn key={code} delay={0.2 + i * 0.1} x={i ? 80 : -80} y={0} duration={0.9} className={`mx-auto w-full max-w-[360px] ${i ? 'lg:order-3' : ''}`}>
             <iframe
@@ -42,13 +42,13 @@ export default function InstagramSection() {
                   className="h-28 w-28 rounded-full border-4 border-[#0C0C0C] object-cover sm:h-36 sm:w-36"
                 />
               </div>
-  
+
               <div className="flex w-full flex-col items-center gap-6">
                 <div className="flex flex-col items-center text-center">
                   <span className="text-2xl font-medium uppercase sm:text-3xl">Osimxon Dadaxanov</span>
                   <span className="font-light opacity-60">@dadaxanov.26</span>
                 </div>
-  
+
                 <div className="grid w-full grid-cols-3 gap-2 text-center">
                   {stats.map((s) => (
                     <div key={s.label} className="flex flex-col">
@@ -57,20 +57,20 @@ export default function InstagramSection() {
                     </div>
                   ))}
                 </div>
-  
-              <a
-                href={profileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full px-10 py-3 text-sm font-medium uppercase tracking-widest text-white transition-opacity duration-200 hover:opacity-80"
-                style={{ background: igGradient }}
-              >
-                Follow on Instagram
-              </a>
+
+                <a
+                  href={profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full px-10 py-3 text-sm font-medium uppercase tracking-widest text-white transition-opacity duration-200 hover:opacity-80"
+                  style={{ background: igGradient }}
+                >
+                  Follow on Instagram
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </FadeIn>
+        </FadeIn>
       </div>
     </section>
   );
